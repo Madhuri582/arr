@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Word finding in an Array</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 10px;
+    }
+    button {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+    <input type="text" id="searchWord" placeholder="Enter word to search">
+  <button onclick="findWord()">Search</button>
+  <div id="result"></div>
+
+  <script>
+    function findWord() {
+  var sentences = [
+    "The quick brown fox jumps over the lazy dog.",
+    "Hello, how are you today?",
+    "I like ice cream.",
+    "Coding is fun!",
+    "Let's go for a walk."
+  ];
+  var searchWord = document.getElementById('searchWord').value;
+
+  var presentSentences = [];
+  var nonPresentSentences = [];
+
+  for (var i = 0; i < sentences.length; i++) {
+    var sentence = sentences[i].trim();
+    if (sentence.toLowerCase().includes(searchWord.toLowerCase())) {
+      presentSentences.push(sentence);
+    } else {
+      nonPresentSentences.push(searchWord + sentence);
+    }
+  }
+
+  var result = document.getElementById('result');
+  result.innerHTML = '';
+
+  if (presentSentences.length > 0) {
+    var presentHeading = document.createElement('h2');
+    result.appendChild(presentHeading);
+    var presentList = document.createElement('ul');
+    for (var i = 0; i < presentSentences.length; i++) {
+      var listItem = document.createElement('li');
+      listItem.innerText = presentSentences[i];
+      presentList.appendChild(listItem);
+    }
+    result.appendChild(presentList);
+  }
+
+  if (nonPresentSentences.length > 0) {
+    var nonPresentHeading = document.createElement('h2');
+    result.appendChild(nonPresentHeading);
+    var nonPresentList = document.createElement('ul');
+    for (var i = 0; i < nonPresentSentences.length; i++) {
+      var listItem = document.createElement('li');
+      listItem.innerText = nonPresentSentences[i];
+      nonPresentList.appendChild(listItem);
+    }
+    result.appendChild(nonPresentList);
+  }
+}
+
+  </script>
+</body>
+</html>
